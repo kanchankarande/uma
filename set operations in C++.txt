@@ -1,0 +1,102 @@
+#include <iostream>
+#include <set>
+#include <algorithm>
+#include <iterator>
+using namespace std;
+
+// Function to print a set
+template <typename T>
+void printSet(const set<T>& s) {
+    for (const auto& element : s) {
+        cout << element << " ";
+    }
+    cout << endl;
+}
+
+// Union of two sets
+template <typename T>
+set<T> setUnion(const set<T>& set1, const set<T>& set2) {
+    set<T> result;
+    set_union(set1.begin(), set1.end(), set2.begin(), set2.end(),
+              inserter(result, result.begin()));
+    return result;
+}
+
+// Intersection of two sets
+template <typename T>
+set<T> setIntersection(const set<T>& set1, const set<T>& set2) {
+    set<T> result;
+    set_intersection(set1.begin(), set1.end(), set2.begin(), set2.end(),
+                     inserter(result, result.begin()));
+    return result;
+}
+
+// Difference of two sets (set1 - set2)
+template <typename T>
+set<T> setDifference(const set<T>& set1, const set<T>& set2) {
+    set<T> result;
+    set_difference(set1.begin(), set1.end(), set2.begin(), set2.end(),
+                   inserter(result, result.begin()));
+    return result;
+}
+
+// Symmetric Difference of two sets
+template <typename T>
+set<T> setSymmetricDifference(const set<T>& set1, const set<T>& set2) {
+    set<T> result;
+    set_symmetric_difference(set1.begin(), set1.end(), set2.begin(), set2.end(),
+                             inserter(result, result.begin()));
+    return result;
+}
+
+int main() {
+    set<int> set1, set2;
+    int n, m, element;
+
+    // Input for first set
+    cout << "Enter the number of elements in the first set: ";
+    cin >> n;
+    cout << "Enter the elements of the first set:\n";
+    for (int i = 0; i < n; ++i) {
+        cin >> element;
+        set1.insert(element);
+    }
+
+    // Input for second set
+    cout << "Enter the number of elements in the second set: ";
+    cin >> m;
+    cout << "Enter the elements of the second set:\n";
+    for (int i = 0; i < m; ++i) {
+        cin >> element;
+        set2.insert(element);
+    }
+
+    // Perform and display various set operations
+    cout << "\nFirst Set: ";
+    printSet(set1);
+    
+    cout << "Second Set: ";
+    printSet(set2);
+
+    // Union
+    set<int> unionSet = setUnion(set1, set2);
+    cout << "\nUnion of sets: ";
+    printSet(unionSet);
+
+    // Intersection
+    set<int> intersectionSet = setIntersection(set1, set2);
+    cout << "Intersection of sets: ";
+    printSet(intersectionSet);
+
+    // Difference (set1 - set2)
+    set<int> differenceSet = setDifference(set1, set2);
+    cout << "Difference (set1 - set2): ";
+    printSet(differenceSet);
+
+    // Symmetric Difference
+    set<int> symmetricDifferenceSet = setSymmetricDifference(set1, set2);
+    cout << "Symmetric Difference of sets: ";
+    printSet(symmetricDifferenceSet);
+
+    return 0;
+}
